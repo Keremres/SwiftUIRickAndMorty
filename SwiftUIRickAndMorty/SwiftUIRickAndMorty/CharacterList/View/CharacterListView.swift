@@ -20,6 +20,9 @@ struct CharacterListView: View {
                 .navigationTitle("Rick and Morty")
                 .searchable(text: $viewModel.searchText, prompt: "Search characters")
         }
+        .showAlert(alert: $viewModel.cacheAlert) {
+            alertButton
+        }
     }
     
     @ViewBuilder
@@ -35,7 +38,7 @@ struct CharacterListView: View {
             }
             
         case .error(let error):
-           Text(error)
+            Text(error)
                 .foregroundStyle(Color.red)
             
         case .noData:
@@ -56,13 +59,25 @@ struct CharacterListView: View {
                                 viewModel.loadMorePages()
                             }
                         }
+                        .onChange(of: viewModel.characterList.count) { _, _ in
+                            if character.id == viewModel.filteredCharacters.last?.id {
+                                viewModel.loadMorePages()
+                            }
+                        }
                 }
             }
             .padding()
         }
     }
+    
+    private var alertButton: some View {
+        Button("Cancel", role: .cancel) {}
+    }
 }
 
 #Preview {
-    CharacterListView(viewModel: CharacterListViewModel(networkManager: NetworkManager(), cacheManager: CacheManager(), imageDownloadManager: ImageDownloaderManager()))
+    CharacterListView(viewModel: CharacterListViewModel(networkManager: NetworkManager(),
+                                                        cacheManager: CacheManager(),
+                                                        imageDownloadManager: ImageDownloaderManager(),
+                                                        coreDataManager: CoreDataManager()))
 }

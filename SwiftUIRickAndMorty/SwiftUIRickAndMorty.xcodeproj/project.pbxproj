@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0349645D2D0B0CBF00F7C311 /* Binding+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0349645C2D0B0CBF00F7C311 /* Binding+Extension.swift */; };
+		034964602D0B0ED100F7C311 /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0349645F2D0B0ED100F7C311 /* ErrorAlert.swift */; };
+		034966572D0B23C400F7C311 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034966562D0B23C400F7C311 /* View+Extension.swift */; };
+		0349665A2D0B6CCA00F7C311 /* ImageContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 034966582D0B6CCA00F7C311 /* ImageContainer.xcdatamodeld */; };
+		0349665C2D0B6D9400F7C311 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0349665B2D0B6D9400F7C311 /* CoreDataManager.swift */; };
 		EEB699F72D09CF7200EEA598 /* SwiftUIRickAndMortyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB699F62D09CF7200EEA598 /* SwiftUIRickAndMortyApp.swift */; };
 		EEB699FB2D09CF7300EEA598 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEB699FA2D09CF7300EEA598 /* Assets.xcassets */; };
 		EEB699FE2D09CF7300EEA598 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEB699FD2D09CF7300EEA598 /* Preview Assets.xcassets */; };
@@ -44,6 +49,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0349645C2D0B0CBF00F7C311 /* Binding+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Extension.swift"; sourceTree = "<group>"; };
+		0349645F2D0B0ED100F7C311 /* ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
+		034966562D0B23C400F7C311 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
+		034966592D0B6CCA00F7C311 /* ImageContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ImageContainer.xcdatamodel; sourceTree = "<group>"; };
+		0349665B2D0B6D9400F7C311 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		EEB699F32D09CF7200EEA598 /* SwiftUIRickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIRickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEB699F62D09CF7200EEA598 /* SwiftUIRickAndMortyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIRickAndMortyApp.swift; sourceTree = "<group>"; };
 		EEB699FA2D09CF7300EEA598 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -91,6 +101,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0349645E2D0B0E9600F7C311 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0349645F2D0B0ED100F7C311 /* ErrorAlert.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		0349665D2D0B892500F7C311 /* CoreDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				0349665B2D0B6D9400F7C311 /* CoreDataManager.swift */,
+			);
+			path = CoreDataManager;
+			sourceTree = "<group>";
+		};
 		EEB699EA2D09CF7200EEA598 = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +145,7 @@
 				EEB699F62D09CF7200EEA598 /* SwiftUIRickAndMortyApp.swift */,
 				EEB699FA2D09CF7300EEA598 /* Assets.xcassets */,
 				EEB699FC2D09CF7300EEA598 /* Preview Content */,
+				0349645E2D0B0E9600F7C311 /* Helpers */,
 			);
 			path = SwiftUIRickAndMorty;
 			sourceTree = "<group>";
@@ -145,6 +172,8 @@
 				EEB69A2C2D09D4E500EEA598 /* Data+Extension.swift */,
 				EEB69A2E2D09D8F300EEA598 /* String+Extension.swift */,
 				EEB69A302D09D9DD00EEA598 /* UIIMage+Extension.swift */,
+				0349645C2D0B0CBF00F7C311 /* Binding+Extension.swift */,
+				034966562D0B23C400F7C311 /* View+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -181,6 +210,7 @@
 			children = (
 				EEB69A382D09DB8600EEA598 /* Character.swift */,
 				EEB69A282D09D3E200EEA598 /* CharacterEndpoint.swift */,
+				034966582D0B6CCA00F7C311 /* ImageContainer.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -188,6 +218,7 @@
 		EEB69A432D09EFF600EEA598 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				0349665D2D0B892500F7C311 /* CoreDataManager */,
 				EEB69A462D09F00F00EEA598 /* ImageDownloadManager */,
 				EEB69A452D09F00700EEA598 /* CacheManager */,
 				EEB69A442D09EFFC00EEA598 /* NetworkManager */,
@@ -285,7 +316,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1530;
-				LastUpgradeCheck = 1530;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					EEB699F22D09CF7200EEA598 = {
 						CreatedOnToolsVersion = 15.3;
@@ -354,7 +385,10 @@
 				EEB69A292D09D3E200EEA598 /* CharacterEndpoint.swift in Sources */,
 				EEB69A212D09CF8500EEA598 /* NetworkManager.swift in Sources */,
 				EEB69A312D09D9DD00EEA598 /* UIIMage+Extension.swift in Sources */,
+				0349665C2D0B6D9400F7C311 /* CoreDataManager.swift in Sources */,
+				034966572D0B23C400F7C311 /* View+Extension.swift in Sources */,
 				EEB69A3B2D09E2F200EEA598 /* ImageDownloaderManager.swift in Sources */,
+				0349645D2D0B0CBF00F7C311 /* Binding+Extension.swift in Sources */,
 				EEB69A272D09D26400EEA598 /* CharacterListViewModel.swift in Sources */,
 				EEB69A2B2D09D3FA00EEA598 /* CacheManager.swift in Sources */,
 				EEB69A352D09DB4800EEA598 /* CharacterListView.swift in Sources */,
@@ -363,8 +397,10 @@
 				EEB69A392D09DB8600EEA598 /* Character.swift in Sources */,
 				EEB699F72D09CF7200EEA598 /* SwiftUIRickAndMortyApp.swift in Sources */,
 				EEB69A252D09D17F00EEA598 /* NetworkError.swift in Sources */,
+				034964602D0B0ED100F7C311 /* ErrorAlert.swift in Sources */,
 				EEB69A2F2D09D8F300EEA598 /* String+Extension.swift in Sources */,
 				EEB69A2D2D09D4E500EEA598 /* Data+Extension.swift in Sources */,
+				0349665A2D0B6CCA00F7C311 /* ImageContainer.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,7 +613,6 @@
 		EEB69A1B2D09CF7300EEA598 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -596,7 +631,6 @@
 		EEB69A1C2D09CF7300EEA598 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -615,7 +649,6 @@
 		EEB69A1E2D09CF7300EEA598 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -632,7 +665,6 @@
 		EEB69A1F2D09CF7300EEA598 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -686,6 +718,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		034966582D0B6CCA00F7C311 /* ImageContainer.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				034966592D0B6CCA00F7C311 /* ImageContainer.xcdatamodel */,
+			);
+			currentVersion = 034966592D0B6CCA00F7C311 /* ImageContainer.xcdatamodel */;
+			path = ImageContainer.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = EEB699EB2D09CF7200EEA598 /* Project object */;
 }

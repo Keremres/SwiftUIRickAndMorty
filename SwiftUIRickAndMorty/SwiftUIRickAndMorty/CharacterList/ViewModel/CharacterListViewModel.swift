@@ -22,11 +22,13 @@ final class CharacterListViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var characterList: [CharacterResult] = []
     @Published var filteredCharacters: [CharacterResult] = []
+    @Published var cacheAlert: BasicErrorAlert? = nil
     
     // MARK: - Dependencies
     private let networkManager: NetworkService
     private let cacheManager: CacheService
     private let imageDownloadManager: ImageDownloadService
+    private let coreDataManager: CoreDataService
     
     // MARK: - Private Properties
     private var cancellables = Set<AnyCancellable>()
@@ -40,11 +42,13 @@ final class CharacterListViewModel: ObservableObject {
     init(
         networkManager: NetworkService,
         cacheManager: CacheService,
-        imageDownloadManager: ImageDownloadService
+        imageDownloadManager: ImageDownloadService,
+        coreDataManager: CoreDataService
     ) {
         self.networkManager = networkManager
         self.cacheManager = cacheManager
         self.imageDownloadManager = imageDownloadManager
+        self.coreDataManager = coreDataManager
         setupSearchSubscriber()
     }
     
@@ -144,23 +148,36 @@ extension CharacterListViewModel {
 // MARK: - Image Cache Methods
 extension CharacterListViewModel {
     func handleImageLoading(for urlString: String) async -> Data? {
-        // Cache kontrolü
-        if let cachedImage = retrieveImageFromCache(urlString) {
-            return cachedImage
-        }
-        
         currentImageDownloadTask = Task { @MainActor [weak self] in
             guard let self = self else { return nil }
             
             do {
                 try Task.checkCancellation()
+                // Cache kontrolü
+                if let cachedImage = try? retrieveImageFromCache(urlString) {
+                    return cachedImage
+                }
+                try Task.checkCancellation()
+                // CoreData kontrolü
+                if let coreDataImage = try fetchImage(for: urlString){
+                    try self.cacheImage(coreDataImage, for: urlString)
+                    return coreDataImage
+                }
+                
+                try Task.checkCancellation()
                 if let downloadedData = try await imageDownloadManager.downloadImage(urlString) {
-                    self.cacheImage(downloadedData, for: urlString)
+                    try self.cacheImage(downloadedData, for: urlString)
+                    try self.saveImage(downloadedData, for: urlString)
                     try Task.checkCancellation()
                     return downloadedData
                 }
             } catch {
-                print("Image download error: \(error.localizedDescription)")
+                switch error {
+                case let error as BasicErrorAlert:
+                    self.cacheAlert = error
+                default :
+                    print("Image download error: \(error.localizedDescription)")
+                }
             }
             return nil
         }
@@ -168,13 +185,30 @@ extension CharacterListViewModel {
         return await currentImageDownloadTask?.value
     }
     
-    private func cacheImage(_ imageData: Data, for urlString: String) {
-        cacheManager.setImageCache(url: urlString.asNSString, data: imageData)
+    private func cacheImage(_ imageData: Data, for urlString: String) throws {
+        try cacheManager.setImageCache(url: urlString.asNSString, data: imageData)
     }
     
-    private func retrieveImageFromCache(_ urlString: String) -> Data? {
-        return cacheManager.retrieveImageFromCache(with: urlString.asNSString)
+    private func retrieveImageFromCache(_ urlString: String) throws -> Data? {
+        return try cacheManager.retrieveImageFromCache(with: urlString.asNSString)
     }
-    
 }
 
+//MARK: - CoreData
+extension CharacterListViewModel {
+    private func saveImage(_ imageData: Data, for urlString: String) throws {
+        let imageEntity = ImageEntity(context: coreDataManager.context)
+        imageEntity.imageData = imageData
+        imageEntity.imageUrl = urlString
+        try coreDataManager.save()
+    }
+    
+    private func fetchImage(for urlString: String) throws -> Data? {
+        let imageEntity = try coreDataManager.fetch(ImageEntity.self, searchLocation: "imageUrl", searchText: urlString)?.first
+        return imageEntity?.imageData
+    }
+    
+    private func deleteImage(imageEntity: ImageEntity) throws {
+        try coreDataManager.delete(imageEntity: imageEntity)
+    }
+}

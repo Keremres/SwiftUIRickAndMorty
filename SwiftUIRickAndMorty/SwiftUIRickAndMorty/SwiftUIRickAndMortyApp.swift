@@ -15,7 +15,8 @@ struct SwiftUIRickAndMortyApp: App {
                 viewModel: CharacterListViewModel(
                     networkManager: NetworkManager(),
                     cacheManager: CacheManager(),
-                    imageDownloadManager: ImageDownloaderManager()))
+                    imageDownloadManager: ImageDownloaderManager(),
+                    coreDataManager: CoreDataManager()))
         }
     }
 }

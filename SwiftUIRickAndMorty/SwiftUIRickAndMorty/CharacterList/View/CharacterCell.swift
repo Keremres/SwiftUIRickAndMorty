@@ -90,5 +90,9 @@ struct StatusView: View {
 
 
 #Preview {
-    CharacterCell(character: Character.mockData.results.first!, viewModel: CharacterListViewModel(networkManager: NetworkManager(), cacheManager: CacheManager(), imageDownloadManager: ImageDownloaderManager()))
+    CharacterCell(character: Character.mockData.results.first!,
+                  viewModel: CharacterListViewModel(networkManager: NetworkManager(),
+                                                    cacheManager: CacheManager(),
+                                                    imageDownloadManager: ImageDownloaderManager(),
+                                                    coreDataManager: CoreDataManager()))
 }
